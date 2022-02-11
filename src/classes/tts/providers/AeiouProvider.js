@@ -22,7 +22,7 @@ class AeiouProvider extends AbstractProvider {
   getPlayLogMessage(payload, guild) {
     const { sentence } = payload;
     
-    return `(TTS): Đang phát aeiou ${sentence} cho máy chủ ${guild.name}.`;
+    return `(TTS): Playing aeiou ${sentence} for servers ${guild.name}.`;
   }
 }
 
