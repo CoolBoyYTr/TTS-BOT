@@ -6,7 +6,7 @@ class SpeedCommand extends Command {
   constructor(client) {
     super(client, {
       name: 'speed',
-      description: 'Thay đổi tốc độ nói TTS (phải là **normal** đối với tốc độ bình thường hoặc **slow** đối với tốc độ chậm).',
+      description: 'Change the TTS speaking speed (must be **normal** for normal speed or **slow** for slow speed)).',
       emoji: ':fast_forward:',
       group: 'google-tts',
       guildOnly: true
@@ -18,17 +18,17 @@ class SpeedCommand extends Command {
     const { googleProvider } = message.guild.ttsPlayer;
 
     if (!newSpeed) {
-      return message.reply(`để thiết lập tốc độ TTS, hãy nhập: **${this.client.prefix}speed <tốc độ>** và thay thế *<tốc độ>* với một trong hai *normal* hoặc *slow*.`);
+      return message.reply(`to set the TTS speed, type: **${this.client.prefix}speed <speed>** and replace *<ss>* with either *normal* or *slow*.');
     }
 
     try {
       const setSpeed = googleProvider.setSpeed(newSpeed);
-      logger.info(`Máy chủ ${message.guild.name} đã thay đổi tốc độ thành ${setSpeed}.`);
-      return message.reply(`tốc độ nói đã được đặt thành: **${setSpeed}**`);
+      logger.info(`Server ${message.guild.name} Changed the speed to ${setSpeed}.`);
+      return message.reply(`The speed of speaking has been set to: **${setSpeed}**`);
     } catch (error) {
       if (error instanceof GoogleProviderError) {
         if (error.reason === GoogleProviderError.REASON.invalid) {
-          return message.reply('tốc độ không hợp lệ, nó phải là *normal* hoặc *slow*.');
+          return message.reply('the speed is not valid, it must be *normal* or *slow*.');
         }
 
         throw error;
