@@ -8,7 +8,7 @@ class LangsCommand extends Command {
   constructor(client) {
     super(client, {
       name: 'langs',
-      description: 'Hiển thị danh sách các ngôn ngữ được hỗ trợ.',
+      description: 'Displays a list of supported languages.',
       emoji: ':page_facing_up:',
       group: 'google-tts',
       guildOnly: true
@@ -19,11 +19,11 @@ class LangsCommand extends Command {
 
   createEmbed() {
     const embed = new MessageEmbed()
-      .setTitle('Danh sách các ngôn ngữ được hỗ trợ:')
+      .setTitle('List of supported languages:')
       .setColor(MESSAGE_EMBED.color)
-      .setDescription(`Đây là danh sách đầy đủ của tất cả các ngôn ngữ được hỗ trợ bởi bot TTS này. 
+      .setDescription(`This is the full list of all the languages supported by this TTS bot. 
     
-      Để thay đổi ngôn ngữ, hãy sử dụng **${this.client.prefix}lang <mã ngôn ngữ>**.`)
+      To change the language, use **${this.client.prefix}lang <language code>**.`)
       .setThumbnail(MESSAGE_EMBED.langThumbnail)
       .setURL(MESSAGE_EMBED.langURL);
 
@@ -34,7 +34,7 @@ class LangsCommand extends Command {
     const splitContent = splitContentForEmbedFields(content);
 
     splitContent.forEach((field, index) => {
-      embed.addField(`Trang ${index + 1}:`, field);
+      embed.addField(`Page ${index + 1}:`, field);
     });
 
     return embed;
