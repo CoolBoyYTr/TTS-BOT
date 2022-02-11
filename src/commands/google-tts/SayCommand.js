@@ -37,15 +37,15 @@ class SayCommand extends Command {
     }
 
     if (!channel.viewable) {
-      return message.reply('I can't see your voice channel.');
+      return message.reply('I can`t see your voice channel.');
     }
 
     if (!channel.joinable) {
-      return message.reply('I can't join your voice channel.');
+      return message.reply('I can`t join your voice channel.');
     }
 
     if (!channel.speakable) {
-      return message.reply('I can't speak in your voice channel.');
+      return message.reply('I can`t speak in your voice channel.');
     }
 
     if (channel.full) {
