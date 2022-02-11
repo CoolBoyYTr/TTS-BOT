@@ -40,13 +40,13 @@ const client = new ExtendedClient({
     type: config.get('PRESENCE_TYPE'),
     refreshInterval: config.get('PRESENCE_REFRESH_INTERVAL'),
     templates: [
-      '{num_guilds} máy chủ!',
+      '{num_guilds} server!',
       '{num_guilds} servers!',
-      'Nhập "{prefix}help" để trợ giúp.',
       'Type "{prefix}help" to help.',
-      'Nhập "{prefix}say" để nói.',
+      'Type "{prefix}help" to help.',
       'Type "{prefix}say" to say.',
-      '{num_members} người dùng!',
+      'Type "{prefix}say" to say.',
+      '{num_members} users!',
       '{num_members} users!',
       '{uptime}.',
       'uptime for {uptime}.'
