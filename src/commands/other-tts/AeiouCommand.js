@@ -8,7 +8,7 @@ class AeiouCommand extends Command {
     super(client, {
       name: 'aeiou',
       aliases: ['moonbase'],
-      description: 'Gửi tin nhắn TTS aeiou (tương tự như Moonbase Alpha) trong kênh thoại của bạn.',
+      description: 'Send a TTS aeiou message (similar to Moonbase Alpha) in your voice channel.',
       emoji: ':robot:',
       group: 'other-tts',
       guildOnly: true
@@ -21,41 +21,41 @@ class AeiouCommand extends Command {
     const connection = voice ? voice.connection : null;
 
     if (!channel) {
-      return message.reply('bạn cần trong một kênh thoại trước.');
+      return message.reply('You need it in a previous voice channel.');
     }
 
     if (args.length < 1) {
-      return message.reply('bạn cần nhập một nội dung muốn nói.');
+      return message.reply('you need to enter something you want to say..');
     }
 
     if (connection) {
       if (voice.channel !== channel) {
-        return message.reply('bạn cần phải ở trong cùng một kênh thoại với tôi.');
+        return message.reply('You need to be on the same channel as me..');
       }
 
       return ttsPlayer.say(args.join(' '), AeiouProvider.NAME);
     }
 
     if (!channel.viewable) {
-      return message.reply('Tôi không thể nhìn thấy kênh thoại của bạn.');
+      return message.reply('I can't see your voice channel..');
     }
 
     if (!channel.joinable) {
-      return message.reply('Tôi không thể tham gia kênh thoại của bạn.');
+      return message.reply('I can't join your voice channel.');
     }
 
     if (!channel.speakable) {
-      return message.reply('Tôi không thể nói trong kênh thoại của bạn.');
+      return message.reply('I can't speak in your voice channel..');
     }
 
     if (channel.full) {
-      return message.reply('Kênh thoại của bạn đã đầy.');
+      return message.reply('Your voice channel is full.');
     }
 
     return channel.join()
       .then(() => {
-        logger.info(`Đã tham gia ${channel.name} trong ${guildName}.`);
-        message.channel.send(`Đã tham gia ${channel}.`);
+        logger.info(`Participated ${channel.name} in ${guildName}.`);
+        message.channel.send(`Participated ${channel}.`);
         return ttsPlayer.say(args.join(' '), AeiouProvider.NAME);
       });
   }
