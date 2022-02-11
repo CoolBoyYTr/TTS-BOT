@@ -6,7 +6,7 @@ class LangCommand extends Command {
   constructor(client) {
     super(client, {
       name: 'lang',
-      description: 'Thay đổi ngôn ngữ TTS.',
+      description: 'Change the TTS language.',
       emoji: ':map:',
       group: 'google-tts',
       guildOnly: true
@@ -18,23 +18,25 @@ class LangCommand extends Command {
     const { googleProvider } = message.guild.ttsPlayer;
 
     if (!newLang) {
-      return message.reply(`để thiết lập ngôn ngữ TTS, hãy chạy: **${this.client.prefix}lang <mã ngôn ngữ>**
-      Để xem danh sách các mã ngôn ngữ có sẵn, hãy chạy: **${this.client.prefix}langs**.
-      Ngôn ngữ hiện tại được đặt thành: **${googleProvider.getLang()}**.`);
+      return message.reply(`to set up the TTS language, run: **${this.client.prefix}lang <language code>**
+      
+      To see a list of available language codes, run: **${this.client.prefix}langs**.
+      
+      The current language is set to: **${googleProvider.getLang()}**.`);
     }
 
     newLang = newLang.toString().toLowerCase();
 
     try {
       const setLang = googleProvider.setLang(newLang);
-      logger.info(`Máy chủ ${message.guild.name} đã thay đổi ngôn ngữ thành ${googleProvider.getLang()}.`);
-      return message.reply(`ngôn ngữ đã được đặt thành **${setLang}**.`);
+      logger.info(`Server ${message.guild.name} Changed the language to ${googleProvider.getLang()}.`);
+      return message.reply(`The language has been set. **${setLang}**.`);
     } catch (error) {
       if (error instanceof GoogleProviderError) {
         if (error.reason === GoogleProviderError.REASON.invalid) {
-          return message.reply(`ngôn ngữ không hợp lệ. Nhập **${this.client.prefix}langs** để biết danh sách các ngôn ngữ có sẵn.`);
+          return message.reply(`Invalid language. Enter **${this.client.prefix}langs** to find a list of available languages.`);
         } else if (error.reason === GoogleProviderError.REASON.same) {
-          return message.reply(`ngôn ngữ đã được đặt thành **${googleProvider.getLang()}**.`);
+          return message.reply(`The language has been set. **${googleProvider.getLang()}**.`);
         }
 
         throw error;
